@@ -4,9 +4,7 @@ export class CalculateMoves{
 		console.log(args);
 		// switch (args.trim()){
 		// case: 'PLACE' console.log();
+		return 'test';
 
 	}
-
-
-
 }

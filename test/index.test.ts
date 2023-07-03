@@ -4,8 +4,15 @@ import { CalculateMoves } from '@src/controller/calculateMoves';
 jest.mock('@src/controller/calculateMoves');
 
 
+
+
 describe('test the robot query responses', () => {
+	const calc: CalculateMoves = new CalculateMoves();
+	afterEach(() => {
+		jest.resetModules();
+	});
 	it('should call processMove and a response "test"', () => {
+
 		// Arrange
 		const processMoveMock = jest.fn();
 		(CalculateMoves as jest.Mock).mockImplementation(() => {
@@ -14,7 +21,7 @@ describe('test the robot query responses', () => {
 		const testArgs   = 'MOVE';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -30,7 +37,7 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'PLACE 2,3,NORTH';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -46,7 +53,7 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'MOVE';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -62,7 +69,7 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'LEFT';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -78,7 +85,7 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'RIGHT';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -94,7 +101,7 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'REPORT';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -110,7 +117,7 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'REPORT';
 
 		// Act
-		const result = processQuery(testArgs);
+		const result = processQuery(calc, testArgs);
 
 		// Assert
 		expect(processMoveMock).toHaveBeenCalledWith(testArgs);
@@ -126,24 +133,24 @@ describe('test the robot query responses', () => {
 		const testArgs  = 'PLACE 4,4,NORTH';
 
 		// Act
-		processQuery(testArgs);
+		processQuery(calc, testArgs);
 
 		const testArgs2  = 'REPORT';
 
 		// Act
-		const result = processQuery(testArgs2);
+		const result = processQuery(calc, testArgs2);
 
 		expect(result).toBe('4,4,NORTH');
 
 		const testArgs3  = 'MOVE';
 
 		// Act
-		processQuery(testArgs3);
+		processQuery(calc, testArgs3);
 
 		const testArgs4  = 'REPORT';
 
 		// Act
-		const result2 = processQuery(testArgs4);
+		const result2 = processQuery(calc, testArgs4);
 		// result2 is still the same as before as a move north would place the robot off the table
 		expect(result2).toBe('4,4,NORTH')
 
