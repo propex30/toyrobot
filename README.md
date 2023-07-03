@@ -35,3 +35,27 @@ With more time, I could have included:
 2. A graphical UI for better user experience.
 3. More complex commands for the robot, such as diagonal movement or predefined path following.
 
+## Function Descriptions
+
+1. **`cliAskQuestion()` (in index.ts):**
+   This function initiates a recursive loop to constantly take user input and process it as a robot command until the user inputs 'exit', at which point it closes the readline interface.
+
+
+2. **`processQuery(calc: CalculateMoves, args: string)` (in processQuery.ts):**
+   This function takes an instance of `CalculateMoves` and a string as arguments. It calls the `processMove` method on the `CalculateMoves` instance with the string argument, essentially processing the string as a command for the robot.
+
+
+3. **`processMove(args: string)` (in CalculateMoves class in calculateMoves.ts):**
+   This function takes a string of arguments, parses it, and based on the first word of the command, calls the appropriate method on the robot instance (if it exists). The commands can be 'PLACE', 'MOVE', 'LEFT', 'RIGHT', 'REPORT', or any other command that is ignored.
+
+
+4. **`checkIfAllowedPlacement(x: number, y: number, direction: Direction)` (in CalculateMoves class in calculateMoves.ts):**
+   This function checks if the given x and y coordinates, and the direction are valid for placing the robot on the board. It returns a boolean indicating whether the placement is allowed or not.
+
+
+5. **`moveRobot()` (in BoardRobot class in robot.ts):**
+   This function moves the robot one step in the direction it's currently facing, if the move is within the board boundaries. It does not return anything.
+
+
+6. **`rotateRobot(turn: string)` (in BoardRobot class in robot.ts):**
+   This function rotates the robot 90 degrees in the direction specified by the 'turn' argument (either 'LEFT' or 'RIGHT'). The new direction is calculated using an array of the possible directions and the modulus operator, which ensures that the rotation wraps around at the boundaries.
