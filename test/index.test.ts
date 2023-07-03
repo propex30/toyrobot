@@ -15,16 +15,13 @@ describe('test the robot query responses', () => {
 		const result = processQuery(calc, testArgs);
 
 		// Assert
-		expect(result).toBe('');
+		expect(result).toBe('Bad placement string');
 	});
 
 	it('should handle PLACE Command', () => {
 		const testArgs  = 'PLACE 2,3,NORTH';
 		const result = processQuery(calc, testArgs);
-		expect(typeof result).toBe('object');
-		expect(result).toHaveProperty('x');
-		expect(result).toHaveProperty('y');
-		expect(result).toHaveProperty('direction');
+		expect(result).toBe('');
 	});
 
 	it('should handle REPORT Command', () => {

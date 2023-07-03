@@ -1,7 +1,7 @@
 import * as readline from 'readline';
 import {processQuery} from './controller/processQuery';
-import {CalculateMoves} from '@src/controller/calculateMoves';
-import {BoardRobot} from '@src/controller/robot';
+import {CalculateMoves} from './controller/calculateMoves';
+import {BoardRobot} from './controller/robot';
 
 const rl = readline.createInterface({
 	input: process.stdin,
