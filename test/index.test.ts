@@ -42,9 +42,11 @@ describe('test the robot query responses', () => {
 	});
 
 	it('should handle REPORT Command', () => {
-		const testArgs  = 'REPORT';
-		const result = processQuery(calc, testArgs);
-		expect(result).toBe('test');
+		const testArgs1  = 'PLACE 2,3,NORTH';
+		processQuery(calc, testArgs1);
+		const testArgs2  = 'REPORT';
+		const result2 = processQuery(calc, testArgs2);
+		expect(result2).toBe('2,3,NORTH');
 	});
 
 	it('should handle Move Command', () => {
@@ -62,12 +64,6 @@ describe('test the robot query responses', () => {
 
 	it('should handle RIGHT Command', () => {
 		const testArgs  = 'RIGHT';
-		const result = processQuery(calc, testArgs);
-		expect(result).toBe('test');
-	});
-
-	it('should handle REPORT Command', () => {
-		const testArgs  = 'REPORT';
 		const result = processQuery(calc, testArgs);
 		expect(result).toBe('test');
 	});

@@ -34,10 +34,12 @@ export class CalculateMoves {
 		case 'RIGHT':
 			break;
 		case 'REPORT':
-			break;
+			// dump the current robots location
+			return `${this.robot?.x},${this.robot?.y},${this.robot?.direction}`
+
 		default:
 			return '';
-			break;
+
 
 		}
 	}
