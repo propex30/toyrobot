@@ -1,4 +1,6 @@
-enum Direction {
+import {BoardRobot} from '@src/controller/robot';
+
+export enum Direction {
 	NORTH = 'NORTH',
 	EAST = 'EAST',
 	SOUTH = 'SOUTH',
@@ -6,9 +8,9 @@ enum Direction {
 }
 
 export class CalculateMoves {
-
+	robot: BoardRobot | null = null;
 	processMove(args: string) {
-		let response: string = '';
+
 		const argsArray = args.split(' ');
 		let placeArray: string[];
 
@@ -18,13 +20,12 @@ export class CalculateMoves {
 			placeArray = argsArray[1].split(',');
 			// if not an allowed placement
 			if (!this.checkIfAllowedPlacement(+placeArray[0], +placeArray[1], placeArray[2] as Direction)) {
+				return '';
 				break;
 			} else {
-				return 'OUTPUT';
-				// TODO move
+				this.robot = new BoardRobot(+placeArray[0], +placeArray[1], placeArray[2] as Direction);
+				return this.robot;
 			}
-
-
 			break;
 		case 'MOVE':
 			break;
@@ -35,10 +36,10 @@ export class CalculateMoves {
 		case 'REPORT':
 			break;
 		default:
+			return '';
 			break;
 
 		}
-		return response;
 	}
 
 	checkIfAllowedPlacement(x: number, y: number, direction: Direction): boolean {

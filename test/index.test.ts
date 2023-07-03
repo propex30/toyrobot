@@ -1,5 +1,6 @@
 import { processQuery } from '@src/controller/processQuery';
 import { CalculateMoves } from '@src/controller/calculateMoves';
+// import {BoardRobot} from '@src/controller/robot';
 
 //jest.mock('@src/controller/calculateMoves');
 
@@ -34,7 +35,16 @@ describe('test the robot query responses', () => {
 	it('should handle PLACE Command', () => {
 		const testArgs  = 'PLACE 2,3,NORTH';
 		const result = processQuery(calc, testArgs);
-		expect(result).toBe('OUTPUT');
+		expect(typeof result).toBe('object');
+		expect(result).toHaveProperty('x');
+		expect(result).toHaveProperty('y');
+		expect(result).toHaveProperty('direction');
+	});
+
+	it('should handle REPORT Command', () => {
+		const testArgs  = 'REPORT';
+		const result = processQuery(calc, testArgs);
+		expect(result).toBe('test');
 	});
 
 	it('should handle Move Command', () => {
