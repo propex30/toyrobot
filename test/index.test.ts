@@ -1,25 +1,11 @@
 import { processQuery } from '@src/controller/processQuery';
 import { CalculateMoves } from '@src/controller/calculateMoves';
-// import {BoardRobot} from '@src/controller/robot';
-
-//jest.mock('@src/controller/calculateMoves');
-
-
-
 
 describe('test the robot query responses', () => {
 	const calc: CalculateMoves = new CalculateMoves();
 	afterEach(() => {
 		jest.resetModules();
 	});
-	// it('should call processMove and a response "test"', () => {
-	//
-	// 	const testArgs   = 'MOVE';
-	//
-	// 	const result = processQuery(calc, testArgs);
-	//
-	// 	expect(result).toBe('test');
-	// });
 
 	it('should handle bad PLACE Command by ignoring it and returning empty string', () => {
 
@@ -69,28 +55,64 @@ describe('test the robot query responses', () => {
 
 	it('should handle Move Command', () => {
 
+		const testArgs1  = 'PLACE 0,0,NORTH';
+		processQuery(calc, testArgs1);
+
 		const testArgs  = 'MOVE';
-		const result = processQuery(calc, testArgs);
-		expect(result).toBe('test');
+		processQuery(calc, testArgs);
+
+		const testArgs4  = 'REPORT';
+		const result4 = processQuery(calc, testArgs4);
+		expect(result4).toBe('0,1,NORTH');
+
+	});
+
+	it('should ignore Move Command that goes off the board', () => {
+
+		const testArgs1  = 'PLACE 4,4,NORTH';
+		processQuery(calc, testArgs1);
+
+		const testArgs  = 'MOVE';
+		processQuery(calc, testArgs);
+
+		const testArgs4  = 'REPORT';
+		const result4 = processQuery(calc, testArgs4);
+		expect(result4).toBe('4,4,NORTH');
+
 	});
 
 	it('should handle LEFT Command', () => {
+
+		const testArgs1  = 'PLACE 4,4,NORTH';
+		processQuery(calc, testArgs1);
+
 		const testArgs  = 'LEFT';
-		const result = processQuery(calc, testArgs);
-		expect(result).toBe('test');
+		processQuery(calc, testArgs);
+
+		const testArgs4  = 'REPORT';
+		const result4 = processQuery(calc, testArgs4);
+		expect(result4).toBe('4,4,WEST');
 	});
 
 	it('should handle RIGHT Command', () => {
+		const testArgs1  = 'PLACE 4,4,NORTH';
+		processQuery(calc, testArgs1);
+
 		const testArgs  = 'RIGHT';
-		const result = processQuery(calc, testArgs);
-		expect(result).toBe('test');
+		processQuery(calc, testArgs);
+
+		const testArgs4  = 'REPORT';
+		const result4 = processQuery(calc, testArgs4);
+		expect(result4).toBe('4,4,EAST');
+
+		const testArgs6  = 'RIGHT';
+		processQuery(calc, testArgs6);
+
+		const testArgs5  = 'REPORT';
+		const result5 = processQuery(calc, testArgs5);
+		expect(result5).toBe('4,4,SOUTH');
 	});
 
-	it('should handle a series of commands and not create a new instance of the class each time', () => {
-		const testArgs  = 'REPORT';
-		const result = processQuery(calc, testArgs);
-		expect(result).toBe('test');
-	});
 
 	it('should ignore commands that make it fall off the table', () => {
 		const testArgs  = 'PLACE 4,4,NORTH';

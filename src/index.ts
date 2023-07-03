@@ -1,6 +1,7 @@
 import * as readline from 'readline';
 import {processQuery} from './controller/processQuery';
 import {CalculateMoves} from '@src/controller/calculateMoves';
+import {BoardRobot} from '@src/controller/robot';
 
 const rl = readline.createInterface({
 	input: process.stdin,
@@ -15,7 +16,7 @@ export function cliAskQuestion() {
 		if(answer.toLowerCase() === 'exit'){
 			rl.close();
 		} else {
-			const response: string = processQuery(calc, answer);
+			const response: string | BoardRobot | null = processQuery(calc, answer);
 			if(response){
 				console.log(response);
 			}
