@@ -49,6 +49,24 @@ describe('test the robot query responses', () => {
 		expect(result2).toBe('2,3,NORTH');
 	});
 
+	it('should handle Multiple PLACE Commands and REPORT', () => {
+		const testArgs1  = 'PLACE 2,3,NORTH';
+		processQuery(calc, testArgs1);
+		const testArgs2  = 'REPORT';
+
+		const result2 = processQuery(calc, testArgs2);
+		expect(result2).toBe('2,3,NORTH');
+
+		const testArgs3  = 'PLACE 0,0,WEST';
+		processQuery(calc, testArgs3);
+
+		const testArgs4  = 'REPORT';
+		const result4 = processQuery(calc, testArgs4);
+
+		expect(result4).toBe('0,0,WEST');
+
+	});
+
 	it('should handle Move Command', () => {
 
 		const testArgs  = 'MOVE';
