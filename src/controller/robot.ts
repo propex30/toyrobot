@@ -5,6 +5,8 @@ export enum Direction {
 	WEST = 'WEST'
 }
 
+type TurnDirection = 'LEFT' | 'RIGHT';
+
 export class BoardRobot {
 	x: number;
 	y: number;
@@ -21,7 +23,7 @@ export class BoardRobot {
 	}
 
 	// We only allow movement in the direction specified if our current location is not already on the edge of the board, last row or column for that coordinate (min or max board index)
-	moveRobot(){
+	moveRobot(): void {
 		switch(this.direction){
 		case Direction.NORTH:
 			if(this.y < this.MAX_BOARD_INDEX){
@@ -50,7 +52,7 @@ export class BoardRobot {
 	 * we turn the direction into an indexed array to represent the points of a compass with a numbered basis
 	 * then we minus or add one to that index to do the rotation constraining to < 4, so it wraps to the beginning
 	 */
-	rotateRobot(turn: string) {
+	rotateRobot(turn: TurnDirection): void {
 		const directions = Object.values(Direction);
 		const index = directions.indexOf(this.direction);
 
